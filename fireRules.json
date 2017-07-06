@@ -5,7 +5,7 @@
     "contacts": {
             "$contact": {
                 "businessNumber": {
-                  ".validate": "newData.isNumber() && newData.val().length == 9"
+                  ".validate": "newData.isString() && newData.val().length == 9"
                 },
                 "name": {
                   ".validate": "newData.isString() && newData.val().length >= 2 && newData.val().length <= 48"
