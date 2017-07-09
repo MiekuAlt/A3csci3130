@@ -2,16 +2,19 @@ package com.acme.a3csci3130;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class DetailViewActivity extends Activity {
 
     private EditText nameField, addressField, busNumField;
     private Spinner provSpin, busSpin;
     Contact receivedPersonInfo;
+    private TextView userNote;
     private MyApplicationData appState;
 
     @Override
@@ -27,6 +30,8 @@ public class DetailViewActivity extends Activity {
         addressField = (EditText) findViewById(R.id.address);
         provSpin = (Spinner) findViewById(R.id.province);
         busSpin = (Spinner) findViewById(R.id.business);
+
+        userNote = (TextView) findViewById(R.id.userNote);
 
         if(receivedPersonInfo != null){
             nameField.setText(receivedPersonInfo.name);
@@ -45,14 +50,19 @@ public class DetailViewActivity extends Activity {
         String province = provSpin.getSelectedItem().toString();
         String business = busSpin.getSelectedItem().toString();
 
-        Contact person = new Contact(personID, busNum, name, business, address, province);
+        if(CreateContactAcitivity.checkValues(name, busNum, address)) {
+            Contact person = new Contact(personID, busNum, name, business, address, province);
 
-        appState.firebaseReference.child(personID).setValue(person);
+            appState.firebaseReference.child(personID).setValue(person);
 
-        finish();
+            finish();
 
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        } else {
+            userNote.setText("Please try again!");
+            userNote.setTextColor(Color.RED);
+        }
     }
 
     public void eraseContact(View v)

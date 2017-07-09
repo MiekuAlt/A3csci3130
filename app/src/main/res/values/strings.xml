@@ -6,7 +6,7 @@
     <string name="business_prompt">Primary Business</string>
 
     <string-array name="provinces">
-        <item> </item>
+        <item>\u0020</item>
         <item>AB</item>
         <item>BC</item>
         <item>MB</item>

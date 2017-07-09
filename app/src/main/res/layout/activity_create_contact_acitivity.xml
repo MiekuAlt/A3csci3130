@@ -7,15 +7,15 @@
     tools:context="com.acme.a3csci3130.CreateContactAcitivity">
 
     <EditText
+        android:id="@+id/name"
         android:layout_width="395dp"
         android:layout_height="wrap_content"
-        android:id="@+id/name"
-        android:hint = "Name"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="parent"
-        android:layout_marginTop="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:hint="Name*"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/businessNumber"
@@ -24,7 +24,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:hint="Business Number"
+        android:hint="Business Number*"
         android:inputType="number"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name" />
@@ -85,7 +85,7 @@
 
     <TextView
         android:id="@+id/textProv"
-        android:layout_width="150dp"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:text="Province/Territory:"
@@ -95,12 +95,23 @@
 
     <TextView
         android:id="@+id/textBus"
-        android:layout_width="150dp"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:text="Primary Business:"
+        android:text="Primary Business*:"
         android:textSize="18sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/business"
         app:layout_constraintLeft_toLeftOf="parent" />
+
+    <TextView
+        android:id="@+id/userNote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="* is Required"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/submitButton"
+        app:layout_constraintHorizontal_bias="0.501" />
 
 </android.support.constraint.ConstraintLayout>
