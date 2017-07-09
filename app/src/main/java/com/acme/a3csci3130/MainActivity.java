@@ -11,6 +11,12 @@ import android.widget.TextView;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.database.FirebaseDatabase;
 
+/**
+ * Sets up the initial connection to FireBase, displays the UI contents from the FireBase database
+ *
+ * @author Michael
+ * @author Juliano
+ */
 public class MainActivity extends Activity {
 
 
@@ -52,19 +58,26 @@ public class MainActivity extends Activity {
         });
     }
 
+    /**
+     * Opens the activity for the user to begin creating a new contact
+     *
+     * @param v The view for activity_main
+     */
     public void createContactButton(View v)
     {
-        Intent intent=new Intent(this, CreateContactAcitivity.class);
+        Intent intent=new Intent(this, CreateContactActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Opens the activity for the user to see all the details of a specific contact
+     *
+     * @param person The contact that is being inspected
+     */
     private void showDetailView(Contact person)
     {
         Intent intent = new Intent(this, DetailViewActivity.class);
         intent.putExtra("Contact", person);
         startActivity(intent);
     }
-
-
-
 }

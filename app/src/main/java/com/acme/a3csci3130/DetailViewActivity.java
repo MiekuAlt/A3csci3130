@@ -9,11 +9,16 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+/**
+ * Displays the contact's information in detail, it also allows for the editing and removal of contacts
+ *
+ * @author Michael
+ */
 public class DetailViewActivity extends Activity {
 
     private EditText nameField, addressField, busNumField;
     private Spinner provSpin, busSpin;
-    Contact receivedPersonInfo;
+    private Contact receivedPersonInfo;
     private TextView userNote;
     private MyApplicationData appState;
 
@@ -42,6 +47,10 @@ public class DetailViewActivity extends Activity {
         }
     }
 
+    /**
+     * Updates the contact stored in FireBase once the user presses the "Update Date" button
+     * @param v The View for activity_detail_view
+     */
     public void updateContact(View v){
         String personID = receivedPersonInfo.uid;
         String name = nameField.getText().toString();
@@ -50,7 +59,7 @@ public class DetailViewActivity extends Activity {
         String province = provSpin.getSelectedItem().toString();
         String business = busSpin.getSelectedItem().toString();
 
-        if(CreateContactAcitivity.checkValues(name, busNum, address)) {
+        if(CreateContactActivity.checkValues(name, busNum, address)) {
             Contact person = new Contact(personID, busNum, name, business, address, province);
 
             appState.firebaseReference.child(personID).setValue(person);
@@ -65,6 +74,10 @@ public class DetailViewActivity extends Activity {
         }
     }
 
+    /**
+     * Removes the contact stored in FireBase once the user presses the "Erase Contact" button
+     * @param v The View for activity_detail_view
+     */
     public void eraseContact(View v)
     {
         String personID = receivedPersonInfo.uid;
@@ -74,53 +87,85 @@ public class DetailViewActivity extends Activity {
         startActivity(intent);
     }
 
+    /**
+     * Determines the index that would represent the province within its StringArray
+     *
+     * @param prov The province that is being checked
+     * @return The index determined by the method
+     */
     private int provIndex(String prov) {
         int index;
 
-        if(prov.equals("AB")) {
-            index = 1;
-        } else if(prov.equals("BC")) {
-            index = 2;
-        } else if(prov.equals("MB")) {
-            index = 3;
-        } else if(prov.equals("NB")) {
-            index = 4;
-        } else if(prov.equals("NL")) {
-            index = 5;
-        } else if(prov.equals("NS")) {
-            index = 6;
-        } else if(prov.equals("NT")) {
-            index = 7;
-        } else if(prov.equals("NU")) {
-            index = 8;
-        } else if(prov.equals("ON")) {
-            index = 9;
-        } else if(prov.equals("PE")) {
-            index = 10;
-        } else if(prov.equals("QC")) {
-            index = 11;
-        } else if(prov.equals("SK")) {
-            index = 12;
-        } else if(prov.equals("YT")) {
-            index = 13;
-        } else {
-            index = 0;
+        switch (prov) {
+            case "AB":
+                index = 1;
+                break;
+            case "BC":
+                index = 2;
+                break;
+            case "MB":
+                index = 3;
+                break;
+            case "NB":
+                index = 4;
+                break;
+            case "NL":
+                index = 5;
+                break;
+            case "NS":
+                index = 6;
+                break;
+            case "NT":
+                index = 7;
+                break;
+            case "NU":
+                index = 8;
+                break;
+            case "ON":
+                index = 9;
+                break;
+            case "PE":
+                index = 10;
+                break;
+            case "QC":
+                index = 11;
+                break;
+            case "SK":
+                index = 12;
+                break;
+            case "YT":
+                index = 13;
+                break;
+            default:
+                index = 0;
+                break;
         }
 
         return index;
     }
 
+    /**
+     * Determines the index that would represent the business within its StringArray
+     *
+     * @param business The business that is being checked
+     * @return The index determined by the method
+     */
     private int busIndex(String business) {
         int index;
 
-        if(business.equals("Fisher")) {
-            index = 0;
-        } else if(business.equals("Distributor")) {
-            index = 1;
-        } else if(business.equals("Processor")) {
-            index = 2;
-        } else {
-            index = 3;
+        switch (business) {
+            case "Fisher":
+                index = 0;
+                break;
+            case "Distributor":
+                index = 1;
+                break;
+            case "Processor":
+                index = 2;
+                break;
+            default:
+                index = 3;
+                break;
         }
 
         return index;
